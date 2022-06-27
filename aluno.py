@@ -1,33 +1,18 @@
-class Aluno():
+from elemento_da_faculdade import Elemento_da_Faculdade
+
+class Aluno(Elemento_da_Faculdade):
     def __init__(self) -> None:
-        self.disciplinas = []
-        self.horarios_do_aluno = {}
+        super().__init__()
+        self.capacidade_max = 1000  # Alunos nao tem limite de quantas disciplinas puxar
 
-    def adicionar_disciplina(self, disciplina_a_adicionar):
-        # Disciplina
+    def checar_elemento(self):  # Diferente da classe Elemento da Faculdade, pois aluno nao trabalha
         """
-        Aceita uma disciplina; retorna False se os horários são conflitantes.
+        Checa o aluno.
+        :param self:
+        :return:
         """
-        horarios_a_adicionar = disciplina_a_adicionar.horarios
-
-        for dia in list(self.horarios_do_aluno.keys()):
-            if dia in list(
-                    horarios_a_adicionar.keys()):  # Só precisamos checar o resto se o professor já trabalha nesse dia
-                horarios_ocupados_do_dia = self.horarios_do_aluno[dia]
-                for hora_indisponivel in horarios_ocupados_do_dia:
-                    if hora_indisponivel in horarios_a_adicionar[dia]:
-                        print("horario conflitante.")
-                        return False
-
-        self.disciplinas.append(disciplina_a_adicionar)
-        for dia in list(disciplina_a_adicionar.horarios.keys()):  # Pegamos o dia da disciplina a adicionar
-            if dia in list(self.horarios_do_aluno.keys()):  # Se o dict horarios_do_prof ja tem esse dia
-                self.horarios_do_aluno[dia].append(horarios_a_adicionar[dia])  # Damos append
-            else:
-                self.horarios_do_aluno[dia] = horarios_a_adicionar[dia]  # Se nao criamos uma nova key
-
-    def mostrar_disciplinas(self):
+        for dia_ocupado, horas_ocupado in self.horarios_de_func.items():
+            print(f"\nEsse elemento atualmente está ocupado na {dia_ocupado}, nos horários {horas_ocupado}")
+        print("\nDisciplinas desse elemento:")
         for disciplina in self.disciplinas:
-            tabela_de_horarios = disciplina.horarios
-            for dia, horarios in tabela_de_horarios.items():
-                print(f"Esse aluno tem na {dia} os horarios {horarios} ocupados.")
+            print(disciplina.identificacao)
